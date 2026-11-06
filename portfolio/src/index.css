@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --color-bg: var(--bg); --color-surface: var(--surface); --color-subtle: var(--subtle);
+  --color-line: var(--line); --color-fg: var(--fg); --color-muted: var(--muted);
+  --color-accent: var(--accent); --color-accent-fg: var(--accent-fg);
+}
+:root { --bg:#fafafa; --surface:#fff; --subtle:#f4f4f5; --line:#e4e4e7; --fg:#18181b; --muted:#52525b; --accent:#4f46e5; --accent-fg:#fff; color-scheme: light; }
+.dark { --bg:#0b0c0f; --surface:#14161b; --subtle:#1a1d24; --line:#272b34; --fg:#f4f4f5; --muted:#a1a1aa; --accent:#818cf8; --accent-fg:#0b0c0f; color-scheme: dark; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+body { font-family: var(--font-sans); background: var(--bg); color: var(--fg); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+::selection { background: color-mix(in oklab, var(--accent) 30%, transparent); }
+
+@keyframes fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.animate-fade-in { animation: fade-in .25s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, ::before, ::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+@layer components {
+  .eyebrow { @apply font-mono text-xs font-medium uppercase tracking-widest text-accent; }
+  .card { @apply rounded-2xl border border-line bg-surface shadow-sm; }
+  .chip { @apply inline-flex items-center rounded-full border border-line bg-subtle px-2.5 py-1 text-xs font-medium text-muted; }
+  .btn-primary { @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-fg transition hover:opacity-90 active:scale-[.98] disabled:opacity-60; }
+  .btn-ghost { @apply inline-flex items-center justify-center gap-2 rounded-full border border-line bg-surface px-5 py-2.5 text-sm font-medium text-fg transition hover:bg-subtle active:scale-[.98]; }
+  .field { @apply w-full rounded-xl border border-line bg-surface px-4 py-2.5 text-sm placeholder:text-muted/60 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25; }
+}
